@@ -12,6 +12,9 @@
 #include <sys/shm.h>
 #endif
 
+//cgmin
+#include <malloc.h>
+
 void fio_unpin_memory(struct thread_data *td)
 {
 	if (td->pinned_mem) {
@@ -45,7 +48,7 @@ int fio_pin_memory(struct thread_data *td)
 	}
 
 	td->pinned_mem = mmap(NULL, td->o.lockmem, PROT_READ | PROT_WRITE,
-				MAP_PRIVATE | OS_MAP_ANON, -1, 0);
+				MAP_PRIVATE | OS_MAP_ANON | MAP_POPULATE, -1, 0); //cgmin
 	if (td->pinned_mem == MAP_FAILED) {
 		perror("malloc locked mem");
 		td->pinned_mem = NULL;
@@ -163,7 +166,7 @@ static int alloc_mem_mmap(struct thread_data *td, size_t total_mem)
 	} else
 		flags |= OS_MAP_ANON | MAP_PRIVATE;
 
-	td->orig_buffer = mmap(NULL, total_mem, PROT_READ | PROT_WRITE, flags,
+	td->orig_buffer = mmap(NULL, total_mem, PROT_READ | PROT_WRITE, flags | MAP_POPULATE, //cgmin
 				td->mmapfd, 0);
 	dprint(FD_MEM, "mmap %llu/%d %p\n", (unsigned long long) total_mem,
 						td->mmapfd, td->orig_buffer);
@@ -198,7 +201,9 @@ static void free_mem_mmap(struct thread_data *td, size_t total_mem)
 
 static int alloc_mem_malloc(struct thread_data *td, size_t total_mem)
 {
-	td->orig_buffer = malloc(total_mem);
+//	td->orig_buffer = malloc(total_mem);
+	td->orig_buffer = memalign(4096,total_mem); //cgmin
+
 	dprint(FD_MEM, "malloc %llu %p\n", (unsigned long long) total_mem,
 							td->orig_buffer);
 

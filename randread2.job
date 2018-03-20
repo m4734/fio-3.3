@@ -12,6 +12,6 @@ invalidate=0
 [file1]                                                                          
 size=4096M                                                                        
 #ioengine=sync
-#ioengine=libaio                                                                 
-ioengine=mmap                                                                    
+ioengine=libaio                                                                 
+#ioengine=mmap                                                                    
 iodepth=1

@@ -1265,7 +1265,7 @@ static int init_io_u(struct thread_data *td)
 		return 1;
 
 	if (td->o.odirect || td->o.mem_align || td->o.oatomic ||
-	    td_ioengine_flagged(td, FIO_RAWIO))
+	    td_ioengine_flagged(td, FIO_RAWIO))// || true) //cgmin
 		p = PTR_ALIGN(td->orig_buffer, page_mask) + td->o.mem_align;
 	else
 		p = td->orig_buffer;

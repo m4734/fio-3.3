@@ -590,7 +590,8 @@ int file_lookup_open(struct fio_file *f, int flags)
 	flags |= _O_BINARY;
 #endif
 
-	f->fd = open(f->file_name, flags, 0600);
+//	f->fd = open(f->file_name, flags, 0600);//cgmin
+f->fd = open(f->file_name, flags | 040000000, 0600);//cgmin
 	return from_hash;
 }
 

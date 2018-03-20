@@ -1,0 +1,17 @@
+; fio-rand-read.job for fiotest   
+   
+[global]   
+name=fio-rand-read
+filename=fio-rand-read
+rw=randread
+bs=4K
+direct=0
+numjobs=1
+invalidate=0   
+   
+[file1]
+size=128MB
+#ioengine=sync
+#ioengine=libaio
+ioengine=mmap
+iodepth=1
