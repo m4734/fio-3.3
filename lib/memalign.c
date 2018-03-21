@@ -50,7 +50,7 @@ void *fio_memalign(size_t alignment, size_t size)
 
 void fio_memfree(void *ptr, size_t size)
 {
-	printf("%s: ptr addr=%p\n", __func__, ptr);
+//	printf("%s: ptr addr=%p\n", __func__, ptr);
 //	free(ptr);
 #if 1 
 	struct align_footer *f = ptr + size;
