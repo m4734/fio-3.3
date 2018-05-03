@@ -2,16 +2,18 @@
                                                                                   
 [global]                                                                         
 name=fio-rand-read                                                               
-filename=fio-rand-read                                                           
+#filename=fio-rand-read                                                           
 rw=randread                                                                      
 bs=4K                                                                            
+ba=4096
 direct=0                                                                         
-numjobs=1                                                                        
+#numjobs=1                                                                        
 invalidate=0                                                                     
+group_reporting
                                                                                   
 [file1]                                                                          
 size=128M                                                                        
 #ioengine=sync
-ioengine=libaio                                                                 
+#ioengine=libaio                                                                 
 #ioengine=mmap                                                                    
 iodepth=1       
