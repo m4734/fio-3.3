@@ -201,8 +201,8 @@ static void free_mem_mmap(struct thread_data *td, size_t total_mem)
 
 static int alloc_mem_malloc(struct thread_data *td, size_t total_mem)
 {
-//	td->orig_buffer = malloc(total_mem);
-	td->orig_buffer = memalign(4096,total_mem); //cgmin
+	td->orig_buffer = malloc(total_mem);
+//	td->orig_buffer = memalign(4096,total_mem); //cgmin
 
 	dprint(FD_MEM, "malloc %llu %p\n", (unsigned long long) total_mem,
 							td->orig_buffer);
